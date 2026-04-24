@@ -1,14 +1,15 @@
 import express from 'express'
+import movies from './routes/movieRoute.js'
 
 
-const app = express()
-
-app.get('/home', (req, res)  =>{
-    res.status(200).json({message : 'the error message'});
-})
+const app = express();
 
 
-app.use(express.json())
-app.use(express.urlencoded({extended: false}))
+app.use(express.json());
+app.use(express.urlencoded({extended: false}));
+
+
+// movie routes
+app.use('/api/v1/movies', movies);
 
 export default app;
