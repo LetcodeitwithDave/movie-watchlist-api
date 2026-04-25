@@ -36,5 +36,3 @@ process.on("SIGTERM", async () => {
     process.exit(1);
   });
 });
-
-// Api designs
