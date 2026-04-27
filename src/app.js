@@ -1,15 +1,12 @@
-import express from 'express'
-import movies from './routes/movieRoute.js'
-
+import express from "express";
+import authRoute from "./routes/authRoute.js";
 
 const app = express();
 
-
 app.use(express.json());
-app.use(express.urlencoded({extended: false}));
+app.use(express.urlencoded({ extended: false }));
 
-
-// movie routes
-app.use('/api/v1/movies', movies);
+// ROUTES
+app.use("/api/v1/auth", authRoute);
 
 export default app;
