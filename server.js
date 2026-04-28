@@ -1,9 +1,8 @@
 // import dotenv from 'dotenv'
-import { config } from "dotenv";
+import "dotenv/config";
 import { connectDB, disconnectDB } from "./src/config/db.js";
 import app from "./src/app.js";
 
-config(); // load .env file globally
 connectDB(); // connect to database
 
 const PORT = process.env.PORT || 3001;
