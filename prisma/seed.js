@@ -1,5 +1,12 @@
-import { prisma } from "../src/config/db.js";
+import { PrismaClient } from "@prisma/client";
+import { PrismaPg } from "@prisma/adapter-pg";
+import "dotenv/config";
 
+const adapter = new PrismaPg({
+  connectionString: process.env.DATABASE_URL,
+});
+
+const prisma = new PrismaClient({ adapter });
 const userId = "51025524-65ba-4c79-b9b5-c9440546611a";
 
 const movies = [
@@ -106,7 +113,7 @@ const movies = [
 ];
 
 // loop through and create each to DB
-const seedMovies = async (next) => {
+const seedMovies = async () => {
   console.log("Seeding movies ....");
 
   try {
@@ -120,6 +127,10 @@ const seedMovies = async (next) => {
     }
   } catch (error) {
     console.error("Error seeding movies:", error);
-    next(error);
+    process.exit(1);
+  } finally {
+    await prisma.$disconnect();
   }
 };
+
+seedMovies();
