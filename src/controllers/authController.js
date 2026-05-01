@@ -62,6 +62,8 @@ const loginUser = async (req, res, next) => {
     // get data
     const { email, password } = req.body;
 
+    // console.log("request body:", req.body);
+
     // validate input
     if (!email || !password) {
       return res
