@@ -6,7 +6,7 @@ const adapter = new PrismaPg({
   connectionString: process.env.DATABASE_URL,
 });
 
-console.log("DATABASE_URL:", process.env.DATABASE_URL);
+// console.log("DATABASE_URL:", process.env.DATABASE_URL);
 
 // console log log data
 const logData =
@@ -15,7 +15,7 @@ const logData =
     : ["error"];
 
 const prisma = new PrismaClient({
-  log: logData,
+  // log: logData,
   adapter, //prisma7 adapter required for postgres connection
 });
 
