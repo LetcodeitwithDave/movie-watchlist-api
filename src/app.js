@@ -13,7 +13,7 @@ app.use(express.urlencoded({ extended: false }));
 // ROUTES
 app.use("/api/v1/auth", authRoute);
 app.use("/api/v1/movies", moiveRoute);
-app.use("/api/v1/watchlist", protectRoute, watchlist);
+app.use("/api/v1/watchlist", watchlist);
 
 // testing protected route
 app.use("/api/v1/currentuser", protectRoute, getCurrenUser);
