@@ -29,10 +29,12 @@ const addToWatchList = async (req, res) => {
       });
     }
 
-    const existingWatchlistItem = await prisma.watchlistItem.findFirst({
+    const existingWatchlistItem = await prisma.watchlistItem.findUnique({
       where: {
-        userId,
-        movieId,
+        userId_movieId: {
+          userId,
+          movieId,
+        },
       },
     });
 
@@ -68,7 +70,25 @@ const addToWatchList = async (req, res) => {
   }
 };
 
-const getWatchList = async (req, res) => {};
+const getWatchList = async (req, res) => {
+  const moviesInWatchlist = await prisma.watchlistItem.findMany();
+
+  console.log("moviesInWatchlist ::", moviesInWatchlist);
+
+  const limit = parseInt(req.query.limit);
+
+  if (!isNaN(limit) && limit > 0) {
+    return res.status(200).json({
+      status: "success",
+      data: moviesInWatchlist.slice(0, limit),
+    });
+  }
+
+  return res.status(200).json({
+    status: "success",
+    data: moviesInWatchlist,
+  });
+};
 
 const removeFromWatchList = async (req, res) => {};
 
