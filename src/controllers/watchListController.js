@@ -71,9 +71,19 @@ const addToWatchList = async (req, res) => {
 };
 
 const getWatchList = async (req, res) => {
-  const moviesInWatchlist = await prisma.watchlistItem.findMany();
+  const moviesInWatchlist = await prisma.watchlistItem.findMany({
+    where: { userId: req.user.id },
+    include: {
+      movie: true,
+    },
+  });
 
-  console.log("moviesInWatchlist ::", moviesInWatchlist);
+  console.log(
+    "movies in warchlist",
+    moviesInWatchlist.length == 0
+      ? "No movies found in watchlist"
+      : moviesInWatchlist.map((item) => item.movie.title),
+  );
 
   const limit = parseInt(req.query.limit);
 
@@ -84,12 +94,41 @@ const getWatchList = async (req, res) => {
     });
   }
 
-  return res.status(200).json({
-    status: "success",
-    data: moviesInWatchlist,
+  return res.status(404).json({
+    status: "error",
+    data:
+      moviesInWatchlist.length == 0
+        ? "No movies found in watchlist"
+        : moviesInWatchlist,
   });
 };
 
-const removeFromWatchList = async (req, res) => {};
+const removeFromWatchList = async (req, res) => {
+  const { movieId } = req.params;
+
+  const userId = req.user.id;
+
+  const deletedItem = await prisma.watchlistItem.deleteMany({
+    where: {
+      userId,
+      movieId,
+    },
+  });
+
+  console.log("deleted item count", deletedItem);
+  console.log("deleted item count", deletedItem.count);
+
+  if (deletedItem.count === 0) {
+    return res.status(404).json({
+      status: "error",
+      message: "Movie not found in watchlist",
+    });
+  }
+
+  return res.status(200).json({
+    status: "success",
+    message: "Movie removed from watchlist",
+  });
+};
 
 export { addToWatchList, getWatchList, removeFromWatchList };
