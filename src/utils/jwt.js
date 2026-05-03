@@ -5,7 +5,7 @@ const generateToken = (userId) => {
     expiresIn: process.env.JWT_EXPIRES_IN,
   });
 
-  console.log("user token", token);
+  // console.log("user token", token);
 
   return token;
 };
