@@ -1,5 +1,3 @@
-// import dotenv from 'dotenv'
-import "dotenv/config";
 import { connectDB, disconnectDB } from "./src/config/db.js";
 import app from "./src/app.js";
 
