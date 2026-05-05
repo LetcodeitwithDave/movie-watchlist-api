@@ -13,7 +13,7 @@ const logData =
     : ["error"];
 
 const prisma = new PrismaClient({
-  // log: logData,
+  log: logData,
   adapter, //prisma7 adapter required for postgres connection
 });
 
