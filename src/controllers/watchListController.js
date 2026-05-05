@@ -80,13 +80,6 @@ const getWatchList = async (req, res) => {
     },
   });
 
-  // console.log(
-  //   "movies in warchlist",
-  //   moviesInWatchlist.length == 0
-  //     ? "No movies found in watchlist"
-  //     : moviesInWatchlist.map((item) => item.movie.title),
-  // );
-
   const limit = parseInt(req.query.limit);
 
   if (!isNaN(limit) && limit > 0) {
