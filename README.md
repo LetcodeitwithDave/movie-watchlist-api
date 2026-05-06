@@ -8,6 +8,8 @@ Base URL: `https://movie-watchlist-api-3oct.onrender.com`
 
 ## Repository
 
+Repo url: `https://github.com/LetcodeitwithDave/movie-watchlist-api.git`
+
 ## Features
 
 * User registration and login
@@ -124,7 +126,7 @@ Authorization: Bearer <your_token>
 
 ### Watchlist Routes (Protected)
 
-> Requires Bearer Token
+> Requires Bearer Token in Header
 
 | Method | Endpoint                     | Description                 |
 | ------ | ---------------------------- | --------------------------- |
